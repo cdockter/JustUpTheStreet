@@ -1,0 +1,15 @@
+<html>
+    <head>
+    </head>
+    <body>
+        {% if prize_list %}
+        <ul>
+            {% for prize in prize_list %}
+                    <li><a href="/prizes/{{prize.id }}/">{{ prize.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No prizes are available.</p>
+    {% endif %}
+    </body>
+</html>

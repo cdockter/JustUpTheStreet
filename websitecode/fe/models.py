@@ -18,7 +18,7 @@ class Contribution(models.Model):
     expires     = models.DateTimeField(auto_now=False)
     
     def __unicode__(self):
-        return self.contributor.name + self.amount
+        return self.contributor.name
 
 class Prize(models.Model):
     id              = models.AutoField(primary_key=True)
