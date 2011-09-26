@@ -1,0 +1,23 @@
+# Standard Python Git Ignore  #
+
+*.mo
+*.egg-info
+*.egg
+*.EGG
+*.EGG-INFO
+
+
+bin
+build
+develop-eggs
+downloads
+eggs
+fake-eggs
+parts
+dist
+
+
+#Compiled Binaries#
+*.pyc
+*.pyo
+*.tmp*
