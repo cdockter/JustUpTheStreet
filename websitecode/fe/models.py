@@ -19,6 +19,16 @@ class Contribution(models.Model):
     
     def __unicode__(self):
         return self.contributor.name
+        
+class Requirement(models.Model):
+    id              = models.AutoField(primary_key=True)
+    description     = models.TextField()
+    
+class Fulfillment(models.Model):
+    id              = models.AutoField(primary_key=True)
+    description     = models.TextField()
+    rule            = models.ForeignKey(Requirement, verbose_name="requirement this fulfillment for")
+    
 
 class Prize(models.Model):
     id              = models.AutoField(primary_key=True)
@@ -26,6 +36,7 @@ class Prize(models.Model):
     description     = models.TextField()
     creator         = models.ForeignKey(Account, verbose_name="creator of the prize")
     contributions   = models.ManyToManyField(Contribution, verbose_name="contributions to this prize")
+    rules           = models.ManyToManyField(Requirement, verbose_name="collection of requirement to claim the prize")
     
     STATE_CHOICES = (
         ('draft', 'Draft'),
@@ -40,3 +51,10 @@ class Prize(models.Model):
     
     def __unicode__(self):
         return self.name
+
+class claim(models.Model):
+  id          = models.AutoField(primary_key=True)
+  claimer     = models.ForeignKey(Account, verbose_name="account that made the claim")
+  claims      = models.ManyToManyField(Fulfillment, verbose_name="collection of assertions about how the requirements were ment")
+  
+  
