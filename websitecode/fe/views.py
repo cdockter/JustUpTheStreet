@@ -6,7 +6,7 @@ from django.http import *
 def index(request):
     #return HttpResponse("Hello, world. You're at the prize index.")
     prize_list = Prize.objects.all()
-    return render_to_response('fe/prize/index.html', {'prize_list': prize_list})
+    return render_to_response('fe/prize/view.html', {'prize_list': prize_list})
     
 def prize(request, prize_id):
     prize = Prize.objects.get(id=prize_id)

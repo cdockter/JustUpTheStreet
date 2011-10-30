@@ -42,8 +42,11 @@ class Prize(models.Model):
         ('draft', 'Draft'),
         ('rfc', 'Request For Comment'),
         ('active', 'Active'),
-        ('claimed', 'Solution Submitted'),
-        ('disputed', 'Under dispute'),
+        ('claim_w', 'Solution Window'),
+        ('review_w', 'Review Window'),
+        ('dispute_w', 'Dispute Window'),
+        ('claimed', 'Solution Accepted'),
+        ('disputed', 'Under Dispute'),
         ('expired', 'Expired'),
         ('paid', 'Completed'),
     )

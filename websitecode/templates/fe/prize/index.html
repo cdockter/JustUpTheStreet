@@ -1,7 +1,9 @@
 <html>
     <head>
+        <title>{% block title %}My amazing site{% endblock %}</title>
     </head>
     <body>
+        old...
         {% if prize_list %}
         <ul>
             {% for prize in prize_list %}
@@ -11,5 +13,7 @@
     {% else %}
         <p>No prizes are available.</p>
     {% endif %}
+    
+    {%block content %}{%endblock%}
     </body>
 </html>
