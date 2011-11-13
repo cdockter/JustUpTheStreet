@@ -1,0 +1,13 @@
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\bin\Debug\WPF.exe
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\bin\Debug\WPF.pdb
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\MainWindow.baml
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\MainWindow.g.cs
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\App.g.cs
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\WPF_MarkupCompile.cache
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\WPF.g.resources
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\WPF.Properties.Resources.resources
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\WPF.exe
+C:\repository\JustUpTheStreet\VisualStudio\FirstWPF\WPF\obj\x86\Debug\WPF.pdb

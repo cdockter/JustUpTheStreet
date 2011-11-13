@@ -1,0 +1,15 @@
+<header>
+    <div>Just Up the Street</div>
+    <div class="login">
+        {% if user.is_authenticated %}
+            Welcome, Caleb Dockter!
+        {%else%}
+            <form>
+                <label for="loginInput">Username</label>
+                <input id="loginInput" name="loginInput" type="text"/>
+                <label for="passwordInput" >Password</label>
+                <input id="passwordInput" name="passwordInput" type="password"/>
+            </form>
+        {% endif%}
+    </div>
+</header>

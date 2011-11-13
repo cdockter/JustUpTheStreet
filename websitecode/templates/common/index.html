@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>{% block title %}Just Up the Street{% endblock %}</title>
+    </head>
+    <body>
+        {% include "common/header.html" %}
+        {% include "common/nav.html" %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    {% include "common/footer.html" %}
+    </body>
+</html>
