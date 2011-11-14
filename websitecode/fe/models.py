@@ -30,13 +30,7 @@ class Fulfillment(models.Model):
     rule            = models.ForeignKey(Requirement, verbose_name="requirement this fulfillment for")
     
 
-class Prize(models.Model):
-    id              = models.AutoField(primary_key=True)
-    name            = models.CharField(max_length=256)
-    description     = models.TextField()
-    creator         = models.ForeignKey(Account, verbose_name="creator of the prize")
-    contributions   = models.ManyToManyField(Contribution, verbose_name="contributions to this prize")
-    rules           = models.ManyToManyField(Requirement, verbose_name="collection of requirement to claim the prize")
+class PrizeState(models.Model):
     
     STATE_CHOICES = (
         ('draft', 'Draft'),
@@ -50,10 +44,21 @@ class Prize(models.Model):
         ('expired', 'Expired'),
         ('paid', 'Completed'),
     )
-    state = models.CharField(max_length=10, choices=STATE_CHOICES)
+    name        = models.CharField(max_length=10, choices=STATE_CHOICES)
+    expires     = models.DateTimeField(auto_now=False)
+
+class Prize(models.Model):
+    id              = models.AutoField(primary_key=True)
+    name            = models.CharField(max_length=256)
+    description     = models.TextField()
+    creator         = models.ForeignKey(Account, verbose_name="creator of the prize")
+    contributions   = models.ManyToManyField(Contribution, verbose_name="contributions to this prize")
+    rules           = models.ManyToManyField(Requirement, verbose_name="collection of requirement to claim the prize")
+    state           = models.ForeignKey(PrizeState, verbose_name="state of the prize")
     
     def __unicode__(self):
         return self.name
+
 
 class claim(models.Model):
   id          = models.AutoField(primary_key=True)

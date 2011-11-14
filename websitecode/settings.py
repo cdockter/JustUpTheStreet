@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 )
 
 ROOT_URLCONF = 'websitecode.urls'
@@ -106,7 +107,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/repository/JustUpTheStreet/websitecode/templates"
+    "/repository/JustUpTheStreet/websitecode/templates",
+    "/repo/JustUpTheStreet/websitecode/templates"
 )
 
 INSTALLED_APPS = (
