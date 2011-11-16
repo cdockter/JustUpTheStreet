@@ -1,0 +1,20 @@
+{% extends "common/layout.html" %}
+
+{% block title %}Create A Prize{% endblock %}
+
+{% block content %}
+    <form action="/prizes/create" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{%endblock%}
+
+
+        <!--<label for="nameInput">Name</label>
+        <input id="nameInput" name="name" type="text"/>
+        <label for="descriptionInput" >Description</label>
+        <input id="descriptionInput" name="description" type="text"/>
+        <label for="contributionInput">Contribution</label>
+        <input id="contributionInput" name="contribution" type="text"/>
+        <label for="rulesInput" >Rules</label>
+        <input id="rulesInput" name="rules" type="text"/>-->
