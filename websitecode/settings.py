@@ -111,6 +111,11 @@ TEMPLATE_DIRS = (
     "/repo/JustUpTheStreet/websitecode/templates"
 )
 
+FIXTURE_DIRS = (
+   '/repository/JustUpTheStreet/websitecode/fixtures/',
+   '/repo/JustUpTheStreet/websitecode/fixtures/',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.admin',
