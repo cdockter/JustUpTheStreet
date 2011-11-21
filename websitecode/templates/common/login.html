@@ -1,0 +1,17 @@
+<div class="login" id="dyn">
+    {% if user.is_authenticated %}
+        Welcome <a href="/account/{{ user.username }}/">{{ user.get_full_name }}</a>!
+        <a id="logout" >logout</a>
+    {%else%}
+        <form method="post">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+        </form>
+        <div class="account_msg" id="login">
+            {% if login_msg %}
+                {{ login_msg }}
+            {% endif%}
+        </div>
+            
+    {% endif%}
+</div>

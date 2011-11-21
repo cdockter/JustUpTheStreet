@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="4" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2011-11-16 22:05:55</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">donate1</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed first_name, last_name and email.</field>
+  </object>
+  <object pk="3" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2011-11-16 22:05:19</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">donate2</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+    <field type="TextField" name="change_message">Changed first_name and last_name.</field>
+  </object>
+  <object pk="2" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2011-11-16 22:04:41</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">3</field>
+    <field type="CharField" name="object_repr">donate2</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"></field>
+  </object>
+  <object pk="1" model="admin.logentry">
+    <field type="DateTimeField" name="action_time">2011-11-16 22:04:30</field>
+    <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+    <field type="TextField" name="object_id">2</field>
+    <field type="CharField" name="object_repr">donate1</field>
+    <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+    <field type="TextField" name="change_message"></field>
+  </object>
+</django-objects>

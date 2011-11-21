@@ -1,14 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import *
 
 # Create your models here.
 
 class Account(models.Model):
     id      = models.AutoField(primary_key=True)
-    name    = models.CharField(max_length=256)
-    display = models.CharField(max_length=256)
+    user    = models.ForeignKey(User)
     
     def __unicode__(self):
-        return self.name
+        return self.user.get_full_name()
 
 class Contribution(models.Model):
     id          = models.AutoField(primary_key=True)

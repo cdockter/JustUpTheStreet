@@ -108,12 +108,14 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     "/repository/JustUpTheStreet/websitecode/templates",
-    "/repo/JustUpTheStreet/websitecode/templates"
+    "/repo/JustUpTheStreet/websitecode/templates",
+    "/repos/JustUpTheStreet/websitecode/templates"
 )
 
 FIXTURE_DIRS = (
    '/repository/JustUpTheStreet/websitecode/fixtures/',
    '/repo/JustUpTheStreet/websitecode/fixtures/',
+   '/repos/JustUpTheStreet/websitecode/fixtures/',
 )
 
 INSTALLED_APPS = (

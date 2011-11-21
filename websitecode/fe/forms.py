@@ -5,6 +5,10 @@ class PrizeForm(forms.Form):
     description     = forms.CharField(required=False)
     contributions   = forms.FloatField(min_value=10, required=False, initial=10)
     expires         = forms.DateTimeField()
-    rule1           = forms.CharField(required=False)
+    rule1           = forms.ModelForm #forms.CharField(required=False)
     rule2           = forms.CharField(required=False)
     rule3           = forms.CharField(required=False)
+
+class LoginForm(forms.Form):
+    username        = forms.CharField(max_length=56)
+    password        = forms.CharField(widget=forms.PasswordInput()) 

@@ -15,8 +15,7 @@ def index(request):
 def prize(request, prize_id):
     prize = Prize.objects.get(id=prize_id)
     
-def create_prize(request): #, name, description, rules, contrib, exp):
-    #prize = Prize(name=name, description=description, rules=rules)
+def create_prize(request):
     if 'POST' == request.method:
         form = PrizeForm(request.POST)
         
@@ -44,7 +43,8 @@ def create_prize(request): #, name, description, rules, contrib, exp):
             return HttpResponse("Form not valid!")
     else:
         form = PrizeForm()
-        return render_to_response('fe/prize/create.html', {'form': form}, RequestContext(request))
+        login_form   = LoginForm()
+        return render_to_response('fe/prize/create.html', {'form': form, 'login_form': login_form}, RequestContext(request))
     
 
 def detail(request, prize_id):

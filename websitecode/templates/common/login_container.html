@@ -1,0 +1,75 @@
+<div class="login" id="container" >
+    <script type="text/javascript">
+        function update_login_div(data)
+        {
+            $('div.login#dyn')[0].innerHTML=data;
+            set_login_clickon();
+            set_logout_clickon();
+        }
+        
+        function update_login_msg(msg)
+        {
+            $('div.account_msg#login')[0].innerHTML=msg;
+        }
+        
+        function login_clickon()
+        {
+            //$.post('/account/' + $('input#id_username').val() + '/login/' , {username: $('input#id_username').val(), password: $('input#id_password').val()}, update_login_div);
+            $.ajax({
+                type: "POST",
+                url: '/account/' + $('input#id_username').val() + '/login/',
+                data: {username: $('input#id_username').val(), password: $('input#id_password').val()},
+                success: update_login_div,
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    if('error' == textStatus)
+                    {
+                        update_login_msg(jqXHR.responseText);
+                    }
+                    else
+                    {
+                        update_login_msg(textStatus)
+                    }
+                }
+                //statusCode:
+                //{
+                //    200: update_login_div(data),
+                //    409: function(msg)
+                //    {
+                //        alert(msg);
+                //        update_login_msg("bad username or password");
+                //    }
+                //}
+            });
+        }
+        
+        function set_login_clickon() {
+            $('input#id_password').keyup(function (event)
+            {
+                if(13 == event.keyCode)
+                {
+                    login_clickon();
+                }
+            });
+            //$('a.#login').click(login_clickon);
+        }
+        
+        function logout_clickon()
+        {
+            $.post('/account/{{ user.username }}/logout/' , {}, update_login_div);
+        }
+        
+        function set_logout_clickon()
+        {
+          $('a.#logout').click(logout_clickon);
+        }
+        
+        $(document).ready(function()
+        {
+          set_login_clickon();
+          set_logout_clickon();
+          alert("Hello world!");
+        });
+    </script>
+    {% include "common/login.html" %}
+</div>
