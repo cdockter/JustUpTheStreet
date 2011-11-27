@@ -5,7 +5,7 @@ from django.contrib.auth.models import *
 
 class Account(models.Model):
     id      = models.AutoField(primary_key=True)
-    user    = models.ForeignKey(User)
+    user    = models.OneToOneField(User)
     
     def __unicode__(self):
         return self.user.get_full_name()
@@ -18,7 +18,7 @@ class Contribution(models.Model):
     expires     = models.DateTimeField(auto_now=False)
     
     def __unicode__(self):
-        return self.contributor.name
+        return self.contributor.__unicode__()
         
 class Requirement(models.Model):
     id              = models.AutoField(primary_key=True)

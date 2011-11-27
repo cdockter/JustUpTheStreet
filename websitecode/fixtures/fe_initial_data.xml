@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
   <object pk="1" model="fe.account">
-    <field to="auth.user" name="user" rel="ManyToOneRel">2</field>
+    <field to="auth.user" name="user" rel="OneToOneRel">1</field>
+  </object>
+  <object pk="2" model="fe.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">2</field>
+  </object>
+  <object pk="3" model="fe.account">
+    <field to="auth.user" name="user" rel="OneToOneRel">3</field>
   </object>
 </django-objects>

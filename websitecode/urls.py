@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^prizes/', 'fe.views.index'),
     url(r'^account/(?P<username>\w+)/login/', 'fe.account.Login'),
     url(r'^account/(?P<username>\w*)/logout/', 'fe.account.Logout'),
+    url(r'^prize/create', 'fe.prize.Create'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

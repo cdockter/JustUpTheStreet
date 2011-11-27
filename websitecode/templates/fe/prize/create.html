@@ -3,8 +3,127 @@
 {% block title %}Create A Prize{% endblock %}
 
 {% block content %}
-    <form action="/prizes/create" method="post">{% csrf_token %}
+    
+    <script type="text/javascript">
+        
+        function update_prize_msg(msg)
+        {
+            $('form#prize_create input:not(#id_prize, :hidden)').each(function (i, element) {
+                var value = $(this).val();
+                if("" == value)
+                {
+                    value = "edit";
+                }
+                $(this).after('<div class="input" id="' + $(this).attr('id') + '">' + value + '</div>').hide().fadeIn();
+                $(this).hide();
+            });            
+            $('a.button#create')[0].innerHTML="Saved";
+            $('input#id_prize')[0].innerHTML=msg
+            set_edit_clickon();
+        }
+        
+        function edit_clickon(event)
+        {
+            $(this).fadeOut();
+            $(this).siblings('#'+$(this).attr('id')).fadeIn();
+            
+        }
+        
+        function set_edit_clickon()
+        {
+            $('div.input').click(edit_clickon);
+        }
+        
+        function save_clickon()
+        {
+            $.ajax({
+                type: "put",
+                url: '/prize/' + $('input#id_prize').val() + '/',
+                data:
+                {
+                    name: $('input#id_name').val(),
+                    description: $('input#id_description').val(),
+                    contribution: $('input#id_contribution').val(),
+                    expires: $('input#id_expires').val()
+                },
+                success: update_prize_msg,
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    if('error' == textStatus)
+                    {
+                        update_prize_msg(jqXHR.responseText);
+                    }
+                    else
+                    {
+                        update_prize_msg(textStatus);
+                    }
+                }
+            });
+        }
+        
+        function create_clickon(event)
+        {
+            update_prize_msg('1');
+            return;
+            $.ajax({
+                type: "POST",
+                url: '/prize/create/',
+                data:
+                {
+                    name: $('input#id_name').val(),
+                    description: $('input#id_description').val(),
+                    contribution: $('input#id_contribution').val(),
+                    expires: $('input#id_expires').val()
+                },
+                success: update_prize_msg,
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    if('error' == textStatus)
+                    {
+                        update_prize_msg(jqXHR.responseText);
+                    }
+                    else
+                    {
+                        update_prize_msg(textStatus);
+                    }
+                }
+            });
+        }
+        
+        function fadethis(event) { 
+            $(this).fadeOut();
+            $(this).fadeIn();
+        }
+        
+        function set_create_clickon()
+        {
+            $('a.button#create').click(create_clickon)
+            //{
+            //    create_clickon(event);
+                //$(this).fadeOut();
+            //    $(this).fadeIn();
+            //});
+            //$('label').click(fadethis)//function (event)
+            //{
+            //    $(this).fadeOut();
+            //    $(this).fadeIn();
+            //});
+            //$('a.#login').click(login_clickon);
+        }
+        
+        $(document).ready(function()
+        {
+          set_create_clickon();
+          set_edit_clickon();
+          alert("js is working!");
+        });
+    </script>
+    <form id="prize_create" action="/prizes/create" method="post">
+        {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit" />
+        <div class=msg></div>
+        <a class="button" id="create">Create</a>
     </form>
+    <div class="requirements">
+    </div>
 {%endblock%}

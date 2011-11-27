@@ -1,0 +1,10 @@
+{% extends "common/layout.html" %}
+
+{% block title %}Create A Prize{% endblock %}
+
+{% block content %}
+    <form action="/prizes/create" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{%endblock%}

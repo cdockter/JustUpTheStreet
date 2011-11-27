@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth import *
 
 def Login(request, username):
+    response    = HttpResponse("You must provide a username and password")
     login_form  = LoginForm()
     login_msg   = ""
     if 'POST' == request.method:
@@ -19,21 +20,16 @@ def Login(request, username):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    response    = render_to_response("common/login.html", {'login_form': login_form, 'login_msg': login_msg }, RequestContext(request))
                     #return HttpResponse("Welcome %s!" % user.get_full_name() )
                 else:
-                    res = HttpResponse("Account Disabled")
-                    res.status_code = 409
-                    return res
+                    response = HttpResponse("Account Disabled")
+                    response.status_code = 409
             else:
-                res = HttpResponse("Bad Username or Password")
-                res.status_code = 401
-                return res
-        else:
-            
-            login_form.username.initial = username
-            login_msg   = "You must provide a username and password"
+                response = HttpResponse("Bad Username or Password")
+                response.status_code = 401
     
-    return render_to_response("common/login.html", {'login_form': login_form, 'login_msg': login_msg }, RequestContext(request))
+    return response
     
 def Logout(request, username):
     logout(request)
