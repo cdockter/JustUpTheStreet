@@ -63,17 +63,17 @@
         
         function create_clickon(event)
         {
-            update_prize_msg('1');
-            return;
+            //update_prize_msg('1');
+            //return;
             $.ajax({
                 type: "POST",
                 url: '/prize/create/',
                 data:
                 {
                     name: $('input#id_name').val(),
-                    description: $('input#id_description').val(),
-                    contribution: $('input#id_contribution').val(),
-                    expires: $('input#id_expires').val()
+                    description: $('input#id_description').val()
+                    //contribution: $('input#id_contribution').val(),
+                    //expires: $('input#id_expires').val()
                 },
                 success: update_prize_msg,
                 error: function(jqXHR, textStatus, errorThrown)
@@ -111,11 +111,39 @@
             //$('a.#login').click(login_clickon);
         }
         
+        function gen_rule_input(element)
+        {
+            var html = "<li><span class='req'></span></li>";
+            //var input = element.after(html).class('req');
+            if(null != element)
+            {
+                var input = element.after(html)
+                input.attr('id', element.attr('id'));
+                alert("null == element");
+            }
+            else
+            {
+                
+            }
+        }
+        
         $(document).ready(function()
         {
           set_create_clickon();
           set_edit_clickon();
-          alert("js is working!");
+          //alert("js is working!");
+          $('#req_edit').click(function (){
+            console.log($(this).siblings('.req_input input'));
+            $(this).siblings('.req_static').hide();
+            $(this).siblings('.req_input').show();
+            $(this).hide();
+            $(this).siblings('#req_save').show();
+            $(this).siblings('.req_input').children('input').val($(this).siblings('.req_static').text());
+            $(this).siblings('.req_static').hide();
+          });
+          $('.req_input').hide();
+          $('#req_save').hide();
+          //gen_rule_input();
         });
     </script>
     <form id="prize_create" action="/prizes/create" method="post">
@@ -125,5 +153,13 @@
         <a class="button" id="create">Create</a>
     </form>
     <div class="requirements">
+        <ul>
+            <li>
+                <span class="req_static">SomeValue</span>
+                <span class="req_input"><input name="rule"/></span>
+                <a id="req_edit">edit</a>
+                <a id="req_save">save</a>
+            </li>
+        </ul>
     </div>
 {%endblock%}
