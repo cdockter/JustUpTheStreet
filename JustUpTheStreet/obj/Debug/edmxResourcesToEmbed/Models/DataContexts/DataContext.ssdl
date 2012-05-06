@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DataContextStoreContainer">
+    <EntitySet Name="Fulfillments" EntityType="DataContext.Store.Fulfillments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Requirements" EntityType="DataContext.Store.Requirements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contributions" EntityType="DataContext.Store.Contributions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Accounts" EntityType="DataContext.Store.Accounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrizeStates" EntityType="DataContext.Store.PrizeStates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prizes" EntityType="DataContext.Store.Prizes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ContributionAccount" Association="DataContext.Store.ContributionAccount">
+      <End Role="Contribution" EntitySet="Contributions" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeAccount" Association="DataContext.Store.PrizeAccount">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FulfillmentRequirement" Association="DataContext.Store.FulfillmentRequirement">
+      <End Role="Fulfillment" EntitySet="Fulfillments" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeStatePrize" Association="DataContext.Store.PrizeStatePrize">
+      <End Role="PrizeState" EntitySet="PrizeStates" />
+      <End Role="Prize" EntitySet="Prizes" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeRequirement" Association="DataContext.Store.PrizeRequirement">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Fulfillments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RequirementId" Type="bigint" Nullable="false" />
+    <Property Name="Requirement_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Requirements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrizeId" Type="int" Nullable="false" />
+    <Property Name="Prize_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contributions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="Contributor_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrizeStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State" Type="smallint" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="Prize_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prizes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Owner_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="ContributionAccount">
+    <End Role="Contribution" Type="DataContext.Store.Contributions" Multiplicity="*" />
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contribution">
+        <PropertyRef Name="Contributor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeAccount">
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="*" />
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prize">
+        <PropertyRef Name="Owner_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FulfillmentRequirement">
+    <End Role="Fulfillment" Type="DataContext.Store.Fulfillments" Multiplicity="*" />
+    <End Role="Requirement" Type="DataContext.Store.Requirements" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Requirement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fulfillment">
+        <PropertyRef Name="Requirement_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeStatePrize">
+    <End Role="PrizeState" Type="DataContext.Store.PrizeStates" Multiplicity="*" />
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrizeState">
+        <PropertyRef Name="Prize_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeRequirement">
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="1" />
+    <End Role="Requirement" Type="DataContext.Store.Requirements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="Prize_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

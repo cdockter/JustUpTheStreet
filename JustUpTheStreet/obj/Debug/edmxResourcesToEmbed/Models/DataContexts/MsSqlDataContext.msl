@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataContextStoreContainer" CdmEntityContainer="MsSqlDataContextContainer">
+    <EntitySetMapping Name="Fulfillments">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Fulfillment)">
+        <MappingFragment StoreEntitySet="Fulfillments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
+          <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requirements">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Requirement)">
+        <MappingFragment StoreEntitySet="Requirements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PrizeId" ColumnName="PrizeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contributions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Contribution)">
+        <MappingFragment StoreEntitySet="Contributions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrizeStates">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.PrizeState)">
+        <MappingFragment StoreEntitySet="PrizeStates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prizes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Prize)">
+        <MappingFragment StoreEntitySet="Prizes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Claims">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Claim)">
+        <MappingFragment StoreEntitySet="Claims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ContributionAccount" TypeName="DataContext.ContributionAccount" StoreEntitySet="Contributions">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Contributor_Id" />
+      </EndProperty>
+      <EndProperty Name="Contribution">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeAccount" TypeName="DataContext.PrizeAccount" StoreEntitySet="Prizes">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Owner_Id" />
+      </EndProperty>
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeStatePrize" TypeName="DataContext.PrizeStatePrize" StoreEntitySet="PrizeStates">
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Prize_Id" />
+      </EndProperty>
+      <EndProperty Name="PrizeState">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeRequirement" TypeName="DataContext.PrizeRequirement" StoreEntitySet="Requirements">
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Prize_Id" />
+      </EndProperty>
+      <EndProperty Name="Requirement">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

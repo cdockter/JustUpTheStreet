@@ -1,0 +1,1 @@
+C:\repository\JustUpTheStreet\SyncDatabase\obj\x86\Debug\ResolveAssemblyReference.cache

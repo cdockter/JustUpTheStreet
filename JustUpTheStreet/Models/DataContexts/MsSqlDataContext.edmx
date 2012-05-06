@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DataContextStoreContainer">
+    <EntitySet Name="Fulfillments" EntityType="DataContext.Store.Fulfillments" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="Requirements" EntityType="DataContext.Store.Requirements" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="Contributions" EntityType="DataContext.Store.Contributions" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="Accounts" EntityType="DataContext.Store.Accounts" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="PrizeStates" EntityType="DataContext.Store.PrizeStates" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="Prizes" EntityType="DataContext.Store.Prizes" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="Claims" EntityType="DataContext.Store.Claims" store:Type="Tables" Schema="juts" />
+    <EntitySet Name="aspnet_Users" EntityType="DataContext.Store.aspnet_Users" store:Type="Tables" Schema="juts" />
+    <AssociationSet Name="ContributionAccount" Association="DataContext.Store.ContributionAccount">
+      <End Role="Contribution" EntitySet="Contributions" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeAccount" Association="DataContext.Store.PrizeAccount">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeStatePrize" Association="DataContext.Store.PrizeStatePrize">
+      <End Role="PrizeState" EntitySet="PrizeStates" />
+      <End Role="Prize" EntitySet="Prizes" />
+    </AssociationSet>
+    <AssociationSet Name="PrizeRequirement" Association="DataContext.Store.PrizeRequirement">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="AccountClaim" Association="DataContext.Store.AccountClaim">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimFulfillment" Association="DataContext.Store.ClaimFulfillment">
+      <End Role="Claim" EntitySet="Claims" />
+      <End Role="Fulfillment" EntitySet="Fulfillments" />
+    </AssociationSet>
+    <AssociationSet Name="RequirementFulfillment" Association="DataContext.Store.RequirementFulfillment">
+      <End Role="Requirement" EntitySet="Requirements" />
+      <End Role="Fulfillment" EntitySet="Fulfillments" />
+    </AssociationSet>
+    <AssociationSet Name="aspnet_UsersAccount" Association="DataContext.Store.aspnet_UsersAccount">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Fulfillments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RequirementId" Type="bigint" Nullable="false" />
+    <Property Name="ClaimId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Requirements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrizeId" Type="int" Nullable="false" />
+    <Property Name="Prize_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contributions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="Contributor_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="smallint" Nullable="false" DefaultValue="1" />
+  </EntityType>
+  <EntityType Name="PrizeStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State" Type="smallint" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="Prize_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prizes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Owner_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Claims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+    <Property Name="aspnet_UsersAccount_aspnet_Users_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="ContributionAccount">
+    <End Role="Contribution" Type="DataContext.Store.Contributions" Multiplicity="*" />
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contribution">
+        <PropertyRef Name="Contributor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeAccount">
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="*" />
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prize">
+        <PropertyRef Name="Owner_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeStatePrize">
+    <End Role="PrizeState" Type="DataContext.Store.PrizeStates" Multiplicity="*" />
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrizeState">
+        <PropertyRef Name="Prize_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrizeRequirement">
+    <End Role="Prize" Type="DataContext.Store.Prizes" Multiplicity="1" />
+    <End Role="Requirement" Type="DataContext.Store.Requirements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="Prize_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountClaim">
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <End Role="Claim" Type="DataContext.Store.Claims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClaimFulfillment">
+    <End Role="Claim" Type="DataContext.Store.Claims" Multiplicity="1" />
+    <End Role="Fulfillment" Type="DataContext.Store.Fulfillments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Claim">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fulfillment">
+        <PropertyRef Name="ClaimId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequirementFulfillment">
+    <End Role="Requirement" Type="DataContext.Store.Requirements" Multiplicity="1" />
+    <End Role="Fulfillment" Type="DataContext.Store.Fulfillments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Requirement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fulfillment">
+        <PropertyRef Name="RequirementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="aspnet_UsersAccount">
+    <End Role="aspnet_Users" Type="DataContext.Store.aspnet_Users" Multiplicity="*" />
+    <End Role="Account" Type="DataContext.Store.Accounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="aspnet_UsersAccount_aspnet_Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="MsSqlDataContextContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Public">
+          <AssociationSet Name="ContributionAccount" Association="DataContext.ContributionAccount">
+            <End Role="Contribution" EntitySet="Contributions" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="PrizeAccount" Association="DataContext.PrizeAccount">
+            <End Role="Prize" EntitySet="Prizes" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="PrizeStatePrize" Association="DataContext.PrizeStatePrize">
+            <End Role="PrizeState" EntitySet="PrizeStates" />
+            <End Role="Prize" EntitySet="Prizes" />
+          </AssociationSet>
+          <AssociationSet Name="PrizeRequirement" Association="DataContext.PrizeRequirement">
+            <End Role="Prize" EntitySet="Prizes" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
+          <EntitySet Name="Fulfillments" EntityType="DataContext.Fulfillment" />
+          <EntitySet Name="Requirements" EntityType="DataContext.Requirement" />
+          <EntitySet Name="Contributions" EntityType="DataContext.Contribution" />
+          <EntitySet Name="Accounts" EntityType="DataContext.Account" />
+          <EntitySet Name="PrizeStates" EntityType="DataContext.PrizeState" />
+          <EntitySet Name="Prizes" EntityType="DataContext.Prize" />
+          <EntitySet Name="Claims" EntityType="DataContext.Claim" />
+          <AssociationSet Name="AccountClaim" Association="DataContext.AccountClaim">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="ClaimFulfillment" Association="DataContext.ClaimFulfillment">
+            <End Role="Claim" EntitySet="Claims" />
+            <End Role="Fulfillment" EntitySet="Fulfillments" />
+          </AssociationSet>
+          <AssociationSet Name="RequirementFulfillment" Association="DataContext.RequirementFulfillment">
+            <End Role="Requirement" EntitySet="Requirements" />
+            <End Role="Fulfillment" EntitySet="Fulfillments" />
+          </AssociationSet>
+          <EntitySet Name="aspnet_Users" EntityType="DataContext.aspnet_Users" />
+          <AssociationSet Name="aspnet_UsersAccount" Association="DataContext.aspnet_UsersAccount">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AccountName" Nullable="false" />
+          <Property Type="String" Name="DisplayName" Nullable="false" />
+          <NavigationProperty Name="Contributions" Relationship="DataContext.ContributionAccount" FromRole="Account" ToRole="Contribution" />
+          <NavigationProperty Name="Prizes" Relationship="DataContext.PrizeAccount" FromRole="Account" ToRole="Prize" />
+          <NavigationProperty Name="Claims" Relationship="DataContext.AccountClaim" FromRole="Account" ToRole="Claim" />
+          <Property Type="Int16" Name="State" Nullable="false" DefaultValue="1" />
+          <NavigationProperty Name="aspnet_Users" Relationship="DataContext.aspnet_UsersAccount" FromRole="Account" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="Prize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <NavigationProperty Name="Owner" Relationship="DataContext.PrizeAccount" FromRole="Prize" ToRole="Account" />
+          <NavigationProperty Name="State" Relationship="DataContext.PrizeStatePrize" FromRole="Prize" ToRole="PrizeState" />
+          <NavigationProperty Name="Requirements" Relationship="DataContext.PrizeRequirement" FromRole="Prize" ToRole="Requirement" />
+          <Property Type="String" Name="Name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrizeState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="State" Nullable="false" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
+          <NavigationProperty Name="Prize" Relationship="DataContext.PrizeStatePrize" FromRole="PrizeState" ToRole="Prize" />
+        </EntityType>
+        <EntityType Name="Requirement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <NavigationProperty Name="Prize" Relationship="DataContext.PrizeRequirement" FromRole="Requirement" ToRole="Prize" />
+          <Property Type="Int32" Name="PrizeId" Nullable="false" />
+          <NavigationProperty Name="SubmittedFulfillments" Relationship="DataContext.RequirementFulfillment" FromRole="Requirement" ToRole="Fulfillment" />
+        </EntityType>
+        <EntityType Name="Fulfillment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Int64" Name="RequirementId" Nullable="false" />
+          <NavigationProperty Name="Claim" Relationship="DataContext.ClaimFulfillment" FromRole="Fulfillment" ToRole="Claim" />
+          <Property Type="Int64" Name="ClaimId" Nullable="false" />
+          <NavigationProperty Name="Requirement" Relationship="DataContext.RequirementFulfillment" FromRole="Fulfillment" ToRole="Requirement" />
+        </EntityType>
+        <EntityType Name="Contribution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contributor" Relationship="DataContext.ContributionAccount" FromRole="Contribution" ToRole="Account" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
+        </EntityType>
+        <Association Name="ContributionAccount">
+          <End Type="DataContext.Contribution" Role="Contribution" Multiplicity="*" />
+          <End Type="DataContext.Account" Role="Account" Multiplicity="1" />
+        </Association>
+        <Association Name="PrizeAccount">
+          <End Type="DataContext.Prize" Role="Prize" Multiplicity="*" />
+          <End Type="DataContext.Account" Role="Account" Multiplicity="1" />
+        </Association>
+        <Association Name="PrizeStatePrize">
+          <End Type="DataContext.PrizeState" Role="PrizeState" Multiplicity="1" />
+          <End Type="DataContext.Prize" Role="Prize" Multiplicity="1" />
+        </Association>
+        <Association Name="PrizeRequirement">
+          <End Type="DataContext.Prize" Role="Prize" Multiplicity="1" />
+          <End Type="DataContext.Requirement" Role="Requirement" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Claimer" Relationship="DataContext.AccountClaim" FromRole="Claim" ToRole="Account" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <NavigationProperty Name="Fulfillments" Relationship="DataContext.ClaimFulfillment" FromRole="Claim" ToRole="Fulfillment" />
+        </EntityType>
+        <Association Name="AccountClaim">
+          <End Type="DataContext.Account" Role="Account" Multiplicity="1" />
+          <End Type="DataContext.Claim" Role="Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClaimFulfillment">
+          <End Type="DataContext.Claim" Role="Claim" Multiplicity="1" />
+          <End Type="DataContext.Fulfillment" Role="Fulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fulfillment">
+              <PropertyRef Name="ClaimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RequirementFulfillment">
+          <End Type="DataContext.Requirement" Role="Requirement" Multiplicity="1" />
+          <End Type="DataContext.Fulfillment" Role="Fulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requirement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fulfillment">
+              <PropertyRef Name="RequirementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+        </EntityType>
+        <Association Name="aspnet_UsersAccount">
+          <End Type="DataContext.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+          <End Type="DataContext.Account" Role="Account" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataContextStoreContainer" CdmEntityContainer="MsSqlDataContextContainer">
+    <EntitySetMapping Name="Fulfillments">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Fulfillment)">
+        <MappingFragment StoreEntitySet="Fulfillments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
+          <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requirements">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Requirement)">
+        <MappingFragment StoreEntitySet="Requirements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PrizeId" ColumnName="PrizeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contributions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Contribution)">
+        <MappingFragment StoreEntitySet="Contributions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrizeStates">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.PrizeState)">
+        <MappingFragment StoreEntitySet="PrizeStates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prizes">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Prize)">
+        <MappingFragment StoreEntitySet="Prizes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Claims">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.Claim)">
+        <MappingFragment StoreEntitySet="Claims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(DataContext.aspnet_Users)">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ContributionAccount" TypeName="DataContext.ContributionAccount" StoreEntitySet="Contributions">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Contributor_Id" />
+      </EndProperty>
+      <EndProperty Name="Contribution">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeAccount" TypeName="DataContext.PrizeAccount" StoreEntitySet="Prizes">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Owner_Id" />
+      </EndProperty>
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeStatePrize" TypeName="DataContext.PrizeStatePrize" StoreEntitySet="PrizeStates">
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Prize_Id" />
+      </EndProperty>
+      <EndProperty Name="PrizeState">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrizeRequirement" TypeName="DataContext.PrizeRequirement" StoreEntitySet="Requirements">
+      <EndProperty Name="Prize">
+        <ScalarProperty Name="Id" ColumnName="Prize_Id" />
+      </EndProperty>
+      <EndProperty Name="Requirement">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="aspnet_UsersAccount" TypeName="DataContext.aspnet_UsersAccount" StoreEntitySet="aspnet_Users">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="aspnet_UsersAccount_aspnet_Users_Id" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="juts" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="DataContext" ZoomLevel="85" >
+        <EntityTypeShape EntityType="DataContext.Account" Width="1.5" PointX="7.75" PointY="0.5" Height="2.3648893229166665" />
+        <EntityTypeShape EntityType="DataContext.Prize" Width="1.5" PointX="3.125" PointY="4.5" Height="2.172587890625" />
+        <EntityTypeShape EntityType="DataContext.PrizeState" Width="1.5" PointX="5.375" PointY="2.625" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="DataContext.Requirement" Width="1.5" PointX="5.5" PointY="5.5" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="DataContext.Fulfillment" Width="1.5" PointX="7.875" PointY="5.5" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="DataContext.Contribution" Width="1.5" PointX="1.25" PointY="7" Height="1.7879850260416665" />
+        <AssociationConnector Association="DataContext.ContributionAccount">
+          <ConnectorPoint PointX="2" PointY="7" />
+          <ConnectorPoint PointX="2" PointY="1.1870816601562502" />
+          <ConnectorPoint PointX="7.75" PointY="1.1870816601562502" />
+        </AssociationConnector>
+        <AssociationConnector Association="DataContext.PrizeAccount">
+          <ConnectorPoint PointX="3.875" PointY="4.5" />
+          <ConnectorPoint PointX="3.875" PointY="1.9366683203125" />
+          <ConnectorPoint PointX="7.75" PointY="1.9366683203125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DataContext.PrizeStatePrize">
+          <ConnectorPoint PointX="5.375" PointY="3.5189925130208337" />
+          <ConnectorPoint PointX="4.2812525" PointY="3.5189925130208337" />
+          <ConnectorPoint PointX="4.2812525" PointY="4.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="DataContext.PrizeRequirement">
+          <ConnectorPoint PointX="4.625" PointY="6.0862939453125" />
+          <ConnectorPoint PointX="5.5" PointY="6.0862939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="DataContext.Claim" Width="1.5" PointX="11.125" PointY="3.375" Height="1.2110807291666665" />
+        <AssociationConnector Association="DataContext.AccountClaim">
+          <ConnectorPoint PointX="9.25" PointY="1.6824446614583333" />
+          <ConnectorPoint PointX="11.875" PointY="1.6824446614583333" />
+          <ConnectorPoint PointX="11.875" PointY="3.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="DataContext.ClaimFulfillment">
+          <ConnectorPoint PointX="11.125" PointY="4.6072488118489581" />
+          <ConnectorPoint PointX="8.87890625" PointY="4.6072488118489581" />
+          <ConnectorPoint PointX="8.87890625" PointY="5.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="DataContext.RequirementFulfillment">
+          <ConnectorPoint PointX="7" PointY="6.4901432291666659" />
+          <ConnectorPoint PointX="7.875" PointY="6.4901432291666659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="DataContext.aspnet_Users" Width="1.5" PointX="12.75" PointY="0.5" Height="2.3648893229166674" />
+        <AssociationConnector Association="DataContext.aspnet_UsersAccount">
+          <ConnectorPoint PointX="12.75" PointY="1.2089782714843746" />
+          <ConnectorPoint PointX="9.25" PointY="1.2089782714843746" />
+        </AssociationConnector>
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

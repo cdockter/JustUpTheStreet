@@ -1,0 +1,30 @@
+﻿@model JustUpTheStreet.Models.DataContexts.Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Account</legend>
+
+    <div class="display-label">AccountName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountName)
+    </div>
+
+    <div class="display-label">DisplayName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DisplayName)
+    </div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
